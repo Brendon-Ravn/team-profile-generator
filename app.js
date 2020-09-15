@@ -34,7 +34,7 @@ const engineerQuestions = [
   ...questions,
   {
     type: 'input',
-    name: 'github',
+    name: 'gitHub',
     message: 'What is their GitHub username?'
   }
 ];
@@ -60,7 +60,7 @@ const managerQuestions = [
 function engineerInfo() {
   inquirer.prompt(engineerQuestions)
     .then((response) => {
-      const engineer = new Engineer(response.name, response.id, response.email, response.github);
+      const engineer = new Engineer(response.name, response.id, response.email, response.gitHub);
       workArray.push(engineer);
       employeeInfo();
     });
