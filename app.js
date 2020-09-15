@@ -10,7 +10,7 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-const team = [];
+const workArray = [];
 
 const questions = [
   {
@@ -35,7 +35,7 @@ const engineerQuestions = [
   {
     type: 'input',
     name: 'github',
-    message: 'What is your GitHub username?'
+    message: 'What is their GitHub username?'
   }
 ];
 
@@ -44,7 +44,7 @@ const internQuestions = [
   {
     type: 'input',
     name: 'school',
-    message: 'What is your current or most recent institute of education?'
+    message: 'What is their current or most recent institute of education?'
   }
 ];
 
@@ -61,7 +61,7 @@ function engineerInfo() {
   inquirer.prompt(engineerQuestions)
     .then((response) => {
       const engineer = new Engineer(response.name, response.id, response.email, response.github);
-      team.push(engineer);
+      workArray.push(engineer);
       employeeInfo();
     });
 }
@@ -70,25 +70,26 @@ function internInfo() {
   inquirer.prompt(internQuestions)
     .then((response) => {
       const intern = new Intern(response.name, response.id, response.email, response.school);
-      team.push(intern);
+      workArray.push(intern);
       employeeInfo();
     });
 }
 
 function createHTML(){
-  try {
-    const html = render(team);
-    fs.writeFileSync(outputPath, html);
-  } catch (err) {
-    console.log(err);
-  }
+  
+    const html = render(workArray);
+    fs.writeFile(outputPath, html, err => {
+      if (err) {
+        console.log(err);
+      }
+    });
 }
 
 function employeeInfo() {
   const whichEmp = [
     {
       name: 'choice',
-      type: 'checkbox',
+      type: 'list',
       message: 'What employee type are we adding?',
       choices: ['Engineer', 'Intern', 'Finished']
     }
@@ -106,3 +107,10 @@ function employeeInfo() {
       }
     });
 }
+
+inquirer.prompt(managerQuestions)
+  .then((response) => {
+    const manager = new Manager(response.name, response.id, response.email, response.officeNumber);
+    workArray.push(manager);
+    employeeInfo();
+  });
