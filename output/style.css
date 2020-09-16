@@ -1,0 +1,15 @@
+body {
+  background-color: black;
+}
+
+.card {
+  background-color: powderblue;
+}
+
+.jumbotron {
+  background-color: powderblue;
+}
+
+.card {
+  min-width: 300px;
+}
