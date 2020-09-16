@@ -27,6 +27,9 @@
   <br />
 ## Usage
   Run 'node app.js' in the terminal and answer the prompts.
+  ![](utils/Readme1.gif)
+  ![](utils/Readme2.gif)
+
   <br />
 ## Test
   npm test
